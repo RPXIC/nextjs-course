@@ -1,0 +1,15 @@
+.container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.title span {
+  color: gray;
+}
+
+.list {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+}

@@ -1,8 +1,11 @@
 import Head from 'next/head'
-import { Container, Card, Row, Text } from '@nextui-org/react'
 import Header from '../components/Header'
+import Image from 'next/image'
+import Link from 'next/link'
+import fs from 'fs/promises'
+import styles from '../styles/Home.module.css'
 
-export default function Home() {
+export default function Home({ latestComics }) {
   return (
     <div>
       <Head>
@@ -14,17 +17,42 @@ export default function Home() {
       <Header />
 
       <main>
-        <Container>
-          <Card color='primary'>
-            <Row justify='center' align='center'>
-              <Text h6 size={15} color='white' css={{ m: 0 }}>
-                NextUI gives you the best developer experience with all the features you need for building beautiful and
-                modern websites and applications.
-              </Text>
-            </Row>
-          </Card>
-        </Container>
+        <h2 className={styles.title}>Latest Comics</h2>
+        {latestComics.map(comic => {
+          return (
+            <Link href={`./comic/${comic.id}`} key={comic.id}>
+              <a>
+                <Image
+                  height={500}
+                  width={500}
+                  layout='intrinsic'
+                  objectFit='contain'
+                  src={comic.img}
+                  alt={comic.alt}
+                />
+              </a>
+            </Link>
+          )
+        })}
       </main>
     </div>
   )
+}
+
+export async function getStaticProps(context) {
+  const files = await fs.readdir('./comics')
+  const latestComicsFiles = files.slice(-8, files.length)
+
+  const promisesReadFiles = latestComicsFiles.map(async file => {
+    const content = await fs.readFile(`./comics/${file}`, 'utf-8')
+    return JSON.parse(content)
+  })
+
+  const latestComics = await Promise.all(promisesReadFiles)
+
+  return {
+    props: {
+      latestComics,
+    },
+  }
 }

@@ -1,25 +1,27 @@
-import { Container, Link, Text } from '@nextui-org/react'
+import Link from 'next/link'
+import styles from '../../styles/Header.module.css'
 
 const Header = () => {
   return (
-    <Container as='heder' responsive display='flex' justify='space-between' alignContent='center'>
-      <Text h1>
-        next<Text>xkcd</Text>
-      </Text>
+    <header className={styles.container}>
+      <h1 className={styles.title}>
+        next<span>xkcd</span>
+      </h1>
       <nav>
-        <Container as='ul' responsive display='flex' direction='row' style={{ gap: 4 }}>
+        <div className={styles.list}>
           <Link href='/'>
             <a>Home</a>
           </Link>
           <Link href='/'>
-            <a>Home</a>
+            <a>About</a>
           </Link>
           <Link href='/'>
-            <a>Home</a>
+            <a>Search</a>
           </Link>
-        </Container>
+        </div>
       </nav>
-    </Container>
+    </header>
   )
 }
+
 export default Header
