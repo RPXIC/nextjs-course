@@ -1,9 +1,9 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import Image from 'next/image'
+import { Layout } from 'components'
 import { readdir, readFile, stat } from 'fs/promises'
 import { basename } from 'path'
-import Header from 'components/Header'
 import styles from 'styles/Comic.module.css'
 
 export default function Comic({ id, img, alt, title, width, height, hasPrevious, hasNext, prevId, nextId }) {
@@ -12,37 +12,36 @@ export default function Comic({ id, img, alt, title, width, height, hasPrevious,
       <Head>
         <title>xkcd - comics for developers</title>
         <meta name='description' content='Comics for developers' />
-        <link rel='icon' href='/favicon.ico' />
       </Head>
 
-      <Header />
+      <Layout>
+        <main>
+          <section className={styles.container}>
+            <h1>{title}</h1>
+            <div className={styles.image}>
+              <Image width={width} height={height} layout='intrinsic' objectFit='contain' src={img} alt={alt} />
+            </div>
+            <p>{alt}</p>
 
-      <main>
-        <section className={styles.container}>
-          <h1>{title}</h1>
-          <div className={styles.image}>
-            <Image width={width} height={height} layout='intrinsic' objectFit='contain' src={img} alt={alt} />
-          </div>
-          <p>{alt}</p>
-
-          <div className={styles.navigation}>
-            {hasPrevious && (
-              <Link href={`./${prevId}`}>
-                <a className={styles.link}>
-                  <h3>Previous</h3>
-                </a>
-              </Link>
-            )}
-            {hasNext && (
-              <Link href={`./${nextId}`}>
-                <a className={styles.link}>
-                  <h3>Next</h3>
-                </a>
-              </Link>
-            )}
-          </div>
-        </section>
-      </main>
+            <div className={styles.navigation}>
+              {hasPrevious && (
+                <Link href={`./${prevId}`}>
+                  <a className={styles.link}>
+                    <h3>⬅ Previous</h3>
+                  </a>
+                </Link>
+              )}
+              {hasNext && (
+                <Link href={`./${nextId}`}>
+                  <a className={styles.link}>
+                    <h3>Next ➡</h3>
+                  </a>
+                </Link>
+              )}
+            </div>
+          </section>
+        </main>
+      </Layout>
     </>
   )
 }

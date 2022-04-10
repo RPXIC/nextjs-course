@@ -8,6 +8,32 @@
   color: gray;
 }
 
+.results {
+  position: absolute;
+  z-index: 1;
+  top: 3.2rem;
+}
+
+.results ul {
+  list-style: none;
+  padding: 0.5rem 0;
+  border-radius: 1rem;
+  box-shadow: 0px 0px 1px 3px #80808021;
+  background-color: white;
+}
+
+.results ul li {
+  padding: 0 1rem;
+}
+.results ul li:hover {
+  background-color: #8080805c;
+  cursor: pointer;
+}
+
+.allResults {
+  color: gray;
+}
+
 .list {
   display: flex;
   flex-direction: row;
