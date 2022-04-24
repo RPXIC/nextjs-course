@@ -3,8 +3,11 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Layout } from 'components'
 import { search } from 'services/search'
+import { useI18N } from 'context/i18n'
 
 export default function Search({ query, results }) {
+  const { t } = useI18N()
+
   return (
     <>
       <Head>
@@ -14,9 +17,7 @@ export default function Search({ query, results }) {
 
       <Layout>
         <>
-          <h1>
-            {results.length} results for {query}
-          </h1>
+          <h1>{t('SEARCH_RESULTS_TITLE', results.length, query)}</h1>
           {results.map(result => (
             <Link key={result.id} href={`/comic/${result.id}`}>
               <a>
