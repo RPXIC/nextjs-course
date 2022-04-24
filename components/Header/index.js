@@ -42,10 +42,7 @@ export default function Header() {
             <a>Home</a>
           </Link>
 
-          <Link href='/' locale={restOfLocales[0]}>
-            <a>{restOfLocales[0]}</a>
-          </Link>
-          {/* <div>
+          <div>
             <input
               ref={searchRef}
               type={'search'}
@@ -53,9 +50,9 @@ export default function Header() {
               onFocus={() => handleFocus(true)}
               onBlur={() => handleFocus(false)}
             />
-          </div> */}
+          </div>
 
-          {/* {results.length > 0 && searchRef.current.value && isFocused && (
+          {results.length > 0 && searchRef.current.value && isFocused && (
             <div className={styles.results}>
               <ul>
                 <Link href={`/search?q=${getValue()}`}>
@@ -72,7 +69,11 @@ export default function Header() {
                 ))}
               </ul>
             </div>
-          )} */}
+          )}
+
+          <Link href='/' locale={restOfLocales[0]}>
+            <a>{restOfLocales[0]}</a>
+          </Link>
         </div>
       </nav>
     </header>
